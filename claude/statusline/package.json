@@ -1,0 +1,21 @@
+{
+	"name": "claude-code-statusline",
+	"version": "1.0.0",
+	"main": "dist/ccstatusline.js",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx src/ccstatusline.ts",
+		"build": "vite build",
+		"start": "node dist/ccstatusline.js"
+	},
+	"devDependencies": {
+		"@types/node": "^24.2.1",
+		"tsx": "^4.20.3",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.1"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Sean Mars"
+	}
+}

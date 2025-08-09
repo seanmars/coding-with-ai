@@ -9,8 +9,12 @@ export default defineConfig({
       fileName: (format) => `ccstatusline.js`
     },
     rollupOptions: {
-      external: [],
+      external: ['child_process', 'fs', 'util'],
+      output: {
+        banner: '#!/usr/bin/env node',
+      }
     },
     outDir: 'dist',
+    target: 'node22',
   },
 });

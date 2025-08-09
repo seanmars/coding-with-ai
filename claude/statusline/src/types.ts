@@ -1,4 +1,4 @@
-export interface StatusJSON {
+export interface ClaudeCodeStatus {
   session_id: string;
   transcript_path: string;
   cwd: string;
@@ -36,11 +36,22 @@ export interface TokenMetrics {
   contextLength: number;
 }
 
+export interface RenderData {
+  elements: Array<ClaudeCodeStatuslineElementType>;
+  workspace: {
+    currentDir: string;
+    projectDir: string;
+  };
+  workingDir: string;
+  modelName: string;
+  tokenMetrics: TokenMetrics;
+  gitBranch: string;
+  version?: string;
+}
+
 export type ClaudeCodeStatuslineElementType =
   'cwd' |
   'model' |
-  'workspace-current-dir' |
-  'workspace-project-dir' |
   'version' |
   'git-branch' |
   'total-tokens' |

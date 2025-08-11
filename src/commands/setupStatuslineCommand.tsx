@@ -68,8 +68,8 @@ const SetupApp: React.FC = () => {
 
   useEffect(() => {
     const loadConfig = async () => {
-      const { configPath } = getConstAppValues();
-      const loadedConfig = await loadStatuslineConfig(configPath);
+      const { userStatuslineConfigPath } = getConstAppValues();
+      const loadedConfig = await loadStatuslineConfig(userStatuslineConfigPath);
       setConfig(loadedConfig);
       setMode("setup");
     };
@@ -77,10 +77,10 @@ const SetupApp: React.FC = () => {
   }, []);
 
   const saveConfig = async () => {
-    const { baseConfigDir, configPath } = getConstAppValues();
+    const { userStatuslineConfigPath } = getConstAppValues();
 
     // Check if file exists and ask for confirmation
-    if (existsSync(configPath)) {
+    if (existsSync(userStatuslineConfigPath)) {
       setSelectedIndex(1);
       setMode("confirm-overwrite");
       return;
@@ -93,13 +93,13 @@ const SetupApp: React.FC = () => {
   const performSave = async () => {
     setMode("saving");
     try {
-      const { baseConfigDir, configPath } = getConstAppValues();
+      const { userStatuslineDir, userStatuslineConfigPath } = getConstAppValues();
 
-      if (!existsSync(baseConfigDir)) {
-        mkdirSync(baseConfigDir, { recursive: true });
+      if (!existsSync(userStatuslineDir)) {
+        mkdirSync(userStatuslineDir, { recursive: true });
       }
 
-      writeFileSync(configPath, JSON.stringify(config, null, 2));
+      writeFileSync(userStatuslineConfigPath, JSON.stringify(config, null, 2));
       setMode("complete");
 
       setTimeout(() => {

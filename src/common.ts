@@ -9,32 +9,23 @@ import {
   StatuslineConfig,
 } from './types.js'
 
-const hexToAnsi = (hex: string): string => {
-  if (!hex || !hex.startsWith('#') || hex.length !== 7) {
-    return '\x1b[37m';
-  }
+export const getConstAppValues = () => {
+  // Claude Code official global configuration directory
+  const CLAUDE_CONFIG_DIR = path.join(process.env.HOME || process.env.USERPROFILE || '', '.claude');
+  const CLAUDE_AGENTS_DIR = path.join(CLAUDE_CONFIG_DIR, 'agents');
+  const CLAUDE_COMMANDS_DIR = path.join(CLAUDE_CONFIG_DIR, 'commands');
 
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+  // Define the base configuration directory on {user folder}/.config/claude-code-statusline
+  const MY_STATUSLINE_DIR = path.join(process.env.HOME || process.env.USERPROFILE || '', '.config', 'claude-code-statusline');
+  const MY_STATUSLINE_CONFIG_PATH = path.join(MY_STATUSLINE_DIR, 'config.json');
 
-  return `\x1b[38;2;${r};${g};${b}m`;
-}
-
-const resetAnsi = (): string => {
-  return '\x1b[0m';
-}
-
-const colorText = (text: string, color: string): string => {
-  return `${hexToAnsi(color)}${text}${resetAnsi()}`;
-}
-
-const normalizedNumber = (num: number): string => {
-  if (num >= 1000) {
-    return (num / 1000).toFixed(2).replace(/\.?0+$/, '') + 'k';
-  }
-
-  return num.toString();
+  return {
+    claudeCodeDir: CLAUDE_CONFIG_DIR,
+    claudeCodeAgentsDir: CLAUDE_AGENTS_DIR,
+    claudeCodeCommandsDir: CLAUDE_COMMANDS_DIR,
+    userStatuslineDir: MY_STATUSLINE_DIR,
+    userStatuslineConfigPath: MY_STATUSLINE_CONFIG_PATH
+  };
 }
 
 export function getPathDirName(path: string): string {
@@ -45,17 +36,6 @@ export function getPathDirName(path: string): string {
   const normalizedPath = path.replace(/\\/g, '/');
   const parts = normalizedPath.split('/').filter(part => part.length > 0);
   return parts.length > 0 ? parts[parts.length - 1] : path;
-}
-
-export const getConstAppValues = () => {
-  // Define the base configuration directory on {user folder}/.config/claude-code-statusline
-  const BASE_CONFIG_DIR = path.join(process.env.HOME || process.env.USERPROFILE || '', '.config', 'claude-code-statusline');
-  const CONFIG_PATH = path.join(BASE_CONFIG_DIR, 'config.json');
-
-  return {
-    baseConfigDir: BASE_CONFIG_DIR,
-    configPath: CONFIG_PATH
-  };
 }
 
 export async function loadStatuslineConfig(configPath: string): Promise<StatuslineConfig> {
@@ -278,4 +258,34 @@ export const renderStatusline = async (data: RenderData): Promise<string> => {
   } catch (error) {
     return '';
   }
+}
+
+// ========== private functions ========== //
+
+const hexToAnsi = (hex: string): string => {
+  if (!hex || !hex.startsWith('#') || hex.length !== 7) {
+    return '\x1b[37m';
+  }
+
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+
+  return `\x1b[38;2;${r};${g};${b}m`;
+}
+
+const resetAnsi = (): string => {
+  return '\x1b[0m';
+}
+
+const colorText = (text: string, color: string): string => {
+  return `${hexToAnsi(color)}${text}${resetAnsi()}`;
+}
+
+const normalizedNumber = (num: number): string => {
+  if (num >= 1000) {
+    return (num / 1000).toFixed(2).replace(/\.?0+$/, '') + 'k';
+  }
+
+  return num.toString();
 }

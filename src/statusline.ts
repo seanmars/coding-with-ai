@@ -27,7 +27,7 @@ async function waitingStdin(): Promise<string> {
 }
 
 const main = async (): Promise<void> => {
-  const { configPath } = getConstAppValues();
+  const { userStatuslineConfigPath } = getConstAppValues();
 
   if (!process.stdin.isTTY) {
     const input = await waitingStdin();
@@ -44,7 +44,7 @@ const main = async (): Promise<void> => {
       const claudeVersion = await getClaudeVersion() ?? '';
       const path = data.transcript_path;
       const metrics = await getTokenMetrics(path);
-      const config = await loadStatuslineConfig(configPath);
+      const config = await loadStatuslineConfig(userStatuslineConfigPath);
 
       const statusline = await renderStatusline({
         elements: config.elements,

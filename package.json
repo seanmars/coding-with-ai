@@ -1,0 +1,25 @@
+{
+	"name": "ccmagic",
+	"version": "1.0.0",
+	"main": "dist/statusline.js",
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"cc:install": "npm run build && tsx src/commands/installCommand.tsx",
+		"cc:setup": "tsx src/commands/setupCommand.tsx"
+	},
+	"devDependencies": {
+		"@types/node": "^24.2.1",
+		"@types/react": "^19.1.9",
+		"ink": "^6.1.0",
+		"ink-select-input": "^6.2.0",
+		"react": "^19.1.1",
+		"tsx": "^4.20.3",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.1"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Sean Mars"
+	}
+}

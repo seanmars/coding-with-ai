@@ -5,8 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
-		"cc:install": "npm run build && tsx src/commands/installStatusLineCommand.tsx",
-		"cc:setup": "tsx src/commands/setupStatusLineCommand.tsx"
+		"cc:statusline:install": "npm run build && tsx src/commands/installStatusLineCommand.tsx",
+		"cc:statusline:setup": "tsx src/commands/setupStatusLineCommand.tsx",
+		"cc:agents:install": "tsx src/commands/installAgentsCommand.tsx"
 	},
 	"devDependencies": {
 		"@types/node": "^24.2.1",

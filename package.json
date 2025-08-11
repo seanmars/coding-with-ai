@@ -8,6 +8,7 @@
 		"cc:statusline:install": "npm run build && tsx src/commands/installStatusLineCommand.tsx",
 		"cc:statusline:setup": "tsx src/commands/setupStatusLineCommand.tsx",
 		"cc:agents:install": "tsx src/commands/installAgentsCommand.tsx",
+		"cc:agents:clone": "tsx src/commands/cloneAgentsCommand.tsx",
 		"cc:commands:install": "tsx src/commands/installCommandsCommand.tsx"
 	},
 	"devDependencies": {

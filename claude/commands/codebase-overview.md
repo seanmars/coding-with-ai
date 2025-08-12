@@ -10,23 +10,23 @@ Give me an overview of the codebase and output it in a markdown file.
 ## Project Discovery Phase
 
 ### Directory Structure
-!`find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path 
+`find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path 
 
 ### Complete File Tree
-!`tree -a -I 'node_modules|.git|dist|build|.next|coverage|*.log|obj|bin' -L 4`
+`tree -a -I 'node_modules|.git|dist|build|.next|coverage|*.log|obj|bin' -L 4`
 
 ### File Count and Size Analysis
-- Total files: !`find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path "**/obj/*" | wc -l`
-- Code files: !`find . -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.py" -o -name "*.java" -o -name "*.php" -o -name "*.rb" -o -name "*.go" -o -name "*.rs" -o -name "*.cpp" -o -name "*.c" -o -name "*.cs" | grep -v node_modules | wc -l`
-- Project size: !`du -sh . --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=.next --exclude=coverage --exclude=bin --exclude=obj`
+- Total files: `find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path "**/obj/*" | wc -l`
+- Code files: `find . -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.py" -o -name "*.java" -o -name "*.php" -o -name "*.rb" -o -name "*.go" -o -name "*.rs" -o -name "*.cpp" -o -name "*.c" -o -name "*.cs" | grep -v node_modules | wc -l`
+- Project size: `du -sh . --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=.next --exclude=coverage --exclude=bin --exclude=obj`
 
 ## Configuration Files Analysis
 
 ### Package Management
 
 - Package.json: @package.json
-- Package-lock.json exists: !`ls package-lock.json 2>/dev/null || echo "Not found"`
-- Yarn.lock exists: !`ls yarn.lock 2>/dev/null || echo "Not found"`
+- Package-lock.json exists: `ls package-lock.json 2>/dev/null || echo "Not found"`
+- Yarn.lock exists: `ls yarn.lock 2>/dev/null || echo "Not found"`
 - Requirements.txt: @requirements.txt
 - Gemfile: @Gemfile
 - Cargo.toml: @Cargo.toml
@@ -47,14 +47,14 @@ Give me an overview of the codebase and output it in a markdown file.
 
 ### Environment & Docker
 
-- .env files: !`find . -name ".env*" -type f`
-- appsetting.json files: !`find . -name "appsetting.json" -o -name "appsettings.*.json" -type f`
-- Docker files: !`find . -name "Dockerfile*" -o -name "docker-compose*"`
-- Kubernetes files: !`find . -name "*.yaml" -o -name "*.yml" | grep -E "(k8s|kubernetes|deployment|service)"`
+- .env files: `find . -name ".env*" -type f`
+- appsetting.json files: `find . -name "appsetting.json" -o -name "appsettings.*.json" -type f`
+- Docker files: `find . -name "Dockerfile*" -o -name "docker-compose*"`
+- Kubernetes files: `find . -name "*.yaml" -o -name "*.yml" | grep -E "(k8s|kubernetes|deployment|service)"`
 
 ### CI/CD Configuration
 
-- GitHub Actions: !`find .github -name "*.yml" -o -name "*.yaml" 2>/dev/null || echo "No GitHub Actions"`
+- GitHub Actions: `find .github -name "*.yml" -o -name "*.yaml" 2>/dev/null || echo "No GitHub Actions"`
 - GitLab CI: @.gitlab-ci.yml
 - Travis CI: @.travis.yml
 - Circle CI: @.circleci/config.yml
@@ -63,25 +63,25 @@ Give me an overview of the codebase and output it in a markdown file.
 
 ### Main Application Files
 
-- Main entry points: !`find . -name "main.*" -o -name "index.*" -o -name "app.*" -o -name "server.*" | grep -v node_modules | head -10`
-- Routes/Controllers: !`find . -path "*/routes/*" -o -path "*/controllers/*" -o -path "*/api/*" | grep -v node_modules | head -20`
-- Models/Schemas: !`find . -path "*/models/*" -o -path "*/schemas/*" -o -path "*/entities/*" | grep -v node_modules | head -20`
-- Components: !`find . -path "*/components/*" -o -path "*/views/*" -o -path "*/pages/*" | grep -v node_modules | head -20`
+- Main entry points: `find . -name "main.*" -o -name "index.*" -o -name "app.*" -o -name "server.*" | grep -v node_modules | head -10`
+- Routes/Controllers: `find . -path "*/routes/*" -o -path "*/controllers/*" -o -path "*/api/*" | grep -v node_modules | head -20`
+- Models/Schemas: `find . -path "*/models/*" -o -path "*/schemas/*" -o -path "*/entities/*" | grep -v node_modules | head -20`
+- Components: `find . -path "*/components/*" -o -path "*/views/*" -o -path "*/pages/*" | grep -v node_modules | head -20`
 
 ### Database & Storage
 
-- Database configs: !`find . -name "*database*" -o -name "*db*" -o -name "*connection*" | grep -v node_modules | head -10`
-- Migration files: !`find . -path "*/migrations/*" -o -path "*/migrate/*" | head -10`
-- Seed files: !`find . -path "*/seeds/*" -o -path "*/seeders/*" | head -10`
+- Database configs: `find . -name "*database*" -o -name "*db*" -o -name "*connection*" | grep -v node_modules | head -10`
+- Migration files: `find . -path "*/migrations/*" -o -path "*/migrate/*" | head -10`
+- Seed files: `find . -path "*/seeds/*" -o -path "*/seeders/*" | head -10`
 
 ### Testing Files
 
-- Test files: !`find . -name "*test*" -o -name "*spec*" | grep -v node_modules | head -15`
+- Test files: `find . -name "*test*" -o -name "*spec*" | grep -v node_modules | head -15`
 - Test config: @jest.config.js
 
 ### API Documentation
 
-- API docs: !`find . -name "*api*" -name "*.md" -o -name "swagger*" -o -name "openapi*" | head -10`
+- API docs: `find . -name "*api*" -name "*.md" -o -name "swagger*" -o -name "openapi*" | head -10`
 
 ## Key Files Content Analysis
 
@@ -93,7 +93,7 @@ Give me an overview of the codebase and output it in a markdown file.
 
 ### Main Application Entry Points
 
-!`find . -name "index.js" -o -name "index.ts" -o -name "main.js" -o -name "main.ts" -o -name "app.js" -o -name "app.ts" -o -name "server.js" -o -name "server.ts" -o -name "main.exe" -o -name "server.exe" -o -name "app.exe" | grep -v node_modules | head -5 | while read file; do echo "=== $file ==="; head -50 "$file"; echo; done`
+`find . -name "index.js" -o -name "index.ts" -o -name "main.js" -o -name "main.ts" -o -name "app.js" -o -name "app.ts" -o -name "server.js" -o -name "server.ts" -o -name "main.exe" -o -name "server.exe" -o -name "app.exe" | grep -v node_modules | head -5 | while read file; do echo "=== $file ==="; head -50 "$file"; echo; done`
 
 ## Your Task
 

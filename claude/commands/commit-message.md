@@ -1,3 +1,8 @@
+---
+allowed-tools: Bash(git add:*), Bash(git commit:*)
+description: Perform a comprehensive analysis of staged files in the current Git repository and generate a structured commit message according to the Conventional Commits specification. If significant changes are detected, stage them and create a commit.
+---
+
 # Generate Commit Message from Staged Files And Commit It
 
 ## Command Objective

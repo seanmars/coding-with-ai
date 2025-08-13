@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # /// script
-# requires-python = ">=3.8"
+# requires-python = ">=3.11"
 # dependencies = [
 #     "pygame>=2.0.0",
 # ]

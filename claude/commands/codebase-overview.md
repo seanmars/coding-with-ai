@@ -10,15 +10,15 @@ Give me an overview of the codebase and output it in a markdown file.
 ## Project Discovery Phase
 
 ### Directory Structure
-`find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path 
+`find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path "**/obj/*" -not -path "**/.idea/*" -not -path "**/.vscode/*"`
 
 ### Complete File Tree
-`tree -a -I 'node_modules|.git|dist|build|.next|coverage|*.log|obj|bin' -L 4`
+`tree -a -I 'node_modules|.git|dist|build|.next|coverage|*.log|obj|bin|.idea|.vscode' -L 4`
 
 ### File Count and Size Analysis
-- Total files: `find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path "**/obj/*" | wc -l`
+- Total files: `find . -type d -not -path "**/node_modules/*" -not -path "./.git/*" -not -path "**/dist/*" -not -path "**/build/*" -not -path "**/.next/*" -not -path "**/coverage/*" -not -path "**/bin/*" -not -path "**/obj/*" -not -path "**/.idea/*" -not -path "**/.vscode/*" | wc -l`
 - Code files: `find . -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.py" -o -name "*.java" -o -name "*.php" -o -name "*.rb" -o -name "*.go" -o -name "*.rs" -o -name "*.cpp" -o -name "*.c" -o -name "*.cs" | grep -v node_modules | wc -l`
-- Project size: `du -sh . --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=.next --exclude=coverage --exclude=bin --exclude=obj`
+- Project size: `du -sh . --exclude=node_modules --exclude=.git --exclude=dist --exclude=build --exclude=.next --exclude=coverage --exclude=bin --exclude=obj --exclude=.idea --exclude=.vscode`
 
 ## Configuration Files Analysis
 
@@ -35,15 +35,15 @@ Give me an overview of the codebase and output it in a markdown file.
 
 ### Build & Dev Tools
 
-- Webpack config: @webpack.config.js
-- Vite config: @vite.config.js
-- Rollup config: @rollup.config.js
-- Babel config: @.babelrc
-- ESLint config: @.eslintrc.js
-- Prettier config: @.prettierrc
-- TypeScript config: @tsconfig.json
-- Tailwind config: @tailwind.config.js
-- Next.js config: @next.config.js
+- Webpack config: @webpack.config.js or @webpack.config.ts
+- Vite config: @vite.config.js or @vite.config.ts
+- Rollup config: @rollup.config.js or @rollup.config.ts
+- Babel config: @.babelrc or @.babelrc.ts
+- ESLint config: @.eslintrc.js or @.eslintrc.ts
+- Prettier config: @.prettierrc or @.prettierrc.ts
+- TypeScript config: @tsconfig.json or @tsconfig.ts
+- Tailwind config: @tailwind.config.js or @tailwind.config.ts
+- Next.js config: @next.config.js or @next.config.ts
 
 ### Environment & Docker
 

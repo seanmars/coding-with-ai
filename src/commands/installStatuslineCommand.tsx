@@ -3,16 +3,25 @@
 import React, { useState, useEffect } from "react";
 import { render, Text, Box, useApp } from "ink";
 import SelectInput from "ink-select-input";
-import { existsSync, mkdirSync, writeFileSync, copyFileSync } from "fs";
+import {
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+  copyFileSync,
+  readFileSync,
+} from "fs";
 import { join } from "path";
 import { homedir } from "os";
 
+interface StatuslineConfig {
+  type: string;
+  command: string;
+  padding: number;
+}
+
 interface SettingsConfig {
-  statusLine: {
-    type: string;
-    command: string;
-    padding: number;
-  };
+  statusLine: StatuslineConfig;
+  [key: string]: any; // Allow additional properties
 }
 
 const defaultSettings: SettingsConfig = {
@@ -111,6 +120,15 @@ const InstallProgress: React.FC<InstallProgressProps> = ({ onComplete }) => {
           JSON.stringify(defaultSettings)
         ) as SettingsConfig;
         settings.statusLine.command = `node ${scriptFilePath}`;
+
+        if (existsSync(settingsFile)) {
+          const existingSettings = JSON.parse(
+            readFileSync(settingsFile, "utf-8")
+          ) as SettingsConfig;
+
+          settings = { ...existingSettings, ...settings };
+        }
+
         writeFileSync(settingsFile, JSON.stringify(settings, null, 2));
         await new Promise((resolve) => setTimeout(resolve, delayTime));
 

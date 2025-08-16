@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
+		"list": "tsx src/commands/listCcCommandsCommand.tsx",
 		"cc:statusline:install": "npm run build && tsx src/commands/installStatusLineCommand.tsx",
 		"cc:statusline:setup": "tsx src/commands/setupStatusLineCommand.tsx",
 		"cc:agents:install": "tsx src/commands/installAgentsCommand.tsx",
@@ -12,14 +13,14 @@
 		"cc:commands:install": "tsx src/commands/installCommandsCommand.tsx"
 	},
 	"devDependencies": {
-		"@types/node": "^24.2.1",
-		"@types/react": "^19.1.9",
-		"ink": "^6.1.0",
+		"@types/node": "^24.3.0",
+		"@types/react": "^19.1.10",
+		"ink": "^6.2.0",
 		"ink-select-input": "^6.2.0",
 		"react": "^19.1.1",
-		"tsx": "^4.20.3",
+		"tsx": "^4.20.4",
 		"typescript": "^5.9.2",
-		"vite": "^7.1.1"
+		"vite": "^7.1.2"
 	},
 	"license": "MIT",
 	"author": {

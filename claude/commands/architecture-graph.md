@@ -1,3 +1,7 @@
+---
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(tree:*), Bash(grep:*), Bash(wc:*), Bash(du:*), Bash(head:*), Bash(tail:*), Bash(cat:*), Bash(touch:*)
+---
+
 # Architecture Graph
 
 After studying this project, use the mermaid syntax to draw the project architecture with the following rules.

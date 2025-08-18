@@ -1,3 +1,7 @@
+---
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(tree:*), Bash(grep:*), Bash(wc:*), Bash(du:*), Bash(head:*), Bash(tail:*), Bash(cat:*), Bash(touch:*)
+---
+
 # Spec Design Command
 
 Create technical design specification for a feature based on approved requirements.

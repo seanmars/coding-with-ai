@@ -1,6 +1,10 @@
+---
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(tree:*), Bash(grep:*)
+---
+
 # List Specs Command
 
-Display all available spec projects in the `.claude/specs` directory.
+Display all available spec projects in the `./.claude/specs` directory.
 
 ## Usage
 ```
@@ -18,11 +22,11 @@ You are helping list all available spec projects to give the user an overview of
 ### Process
 
 1. **Check Specs Directory**
-   - Look for the `.claude/specs` directory in the current project
+   - Look for the `./.claude/specs` directory in the current project
    - If the directory doesn't exist, inform the user that no specs have been created yet
 
 2. **List Spec Folders**
-   - Read all folder names within `.claude/specs/`
+   - Read all folder names within `./.claude/specs/`
    - Filter to show only directories (ignore any files)
    - Sort the list alphabetically for consistent presentation
 
@@ -115,4 +119,4 @@ A successful execution includes:
 /spec-list
 ```
 
-This command will scan the `.claude/specs` directory and present a clean, organized list of all available spec projects, helping users navigate their spec-driven development work effectively.
+This command will scan the `./.claude/specs` directory and present a clean, organized list of all available spec projects, helping users navigate their spec-driven development work effectively.

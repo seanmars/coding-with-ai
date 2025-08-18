@@ -1,3 +1,7 @@
+---
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(tree:*), Bash(grep:*), Bash(wc:*), Bash(du:*), Bash(head:*), Bash(tail:*), Bash(cat:*), Bash(touch:*)
+---
+
 # Spec Tasks Command
 
 Create atomic implementation tasks based on approved requirements and design specifications.

@@ -1,3 +1,7 @@
+---
+allowed-tools: Bash(find:*), Bash(ls:*), Bash(tree:*), Bash(grep:*), Bash(wc:*), Bash(du:*), Bash(head:*), Bash(tail:*), Bash(cat:*), Bash(touch:*)
+---
+
 # Spec Requirements Command
 
 Create requirements specification for a new feature following the spec-driven development workflow.

@@ -2,13 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { render, Text, Box, useInput, useApp } from "ink";
-import {
-  existsSync,
-  readdirSync,
-  mkdirSync,
-  copyFileSync,
-  statSync,
-} from "fs";
+import { existsSync, readdirSync, mkdirSync, copyFileSync, statSync } from "fs";
 import { join, basename } from "path";
 import { homedir } from "os";
 
@@ -34,6 +28,7 @@ const InstallSddApp: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [installProgress, setInstallProgress] = useState<string>("");
   const [existingFiles, setExistingFiles] = useState<SddFile[]>([]);
+  const [newFiles, setNewFiles] = useState<SddFile[]>([]);
 
   const { exit } = useApp();
 
@@ -44,35 +39,50 @@ const InstallSddApp: React.FC = () => {
   const loadSddFiles = async () => {
     try {
       const homeDirectory = homedir();
-      const commandsSourceDir = join(process.cwd(), "claude", "spec-driven-development", "commands");
-      const templatesSourceDir = join(process.cwd(), "claude", "spec-driven-development", "templates");
+      const commandsSourceDir = join(
+        process.cwd(),
+        "claude",
+        "spec-driven-development",
+        "commands"
+      );
+      const templatesSourceDir = join(
+        process.cwd(),
+        "claude",
+        "spec-driven-development",
+        "templates"
+      );
       const commandsTargetDir = join(homeDirectory, ".claude", "commands");
       const templatesTargetDir = join(homeDirectory, ".claude", "templates");
 
       const allFiles: SddFile[] = [];
       const conflictingFiles: SddFile[] = [];
+      const newFiles: SddFile[] = [];
 
       // Process commands
       if (existsSync(commandsSourceDir)) {
         const commandFiles = readdirSync(commandsSourceDir).filter(
-          (file) => file.endsWith(".md") && statSync(join(commandsSourceDir, file)).isFile()
+          (file) =>
+            file.endsWith(".md") &&
+            statSync(join(commandsSourceDir, file)).isFile()
         );
 
         for (const file of commandFiles) {
           const sourcePath = join(commandsSourceDir, file);
           const targetPath = join(commandsTargetDir, file);
           const exists = existsSync(targetPath);
-          
+
           const sddFile: SddFile = {
             name: `commands/${basename(file, ".md")}`,
             sourcePath,
             targetPath,
             exists,
           };
-          
+
           allFiles.push(sddFile);
           if (exists) {
             conflictingFiles.push(sddFile);
+          } else {
+            newFiles.push(sddFile);
           }
         }
       }
@@ -80,24 +90,28 @@ const InstallSddApp: React.FC = () => {
       // Process templates
       if (existsSync(templatesSourceDir)) {
         const templateFiles = readdirSync(templatesSourceDir).filter(
-          (file) => file.endsWith(".md") && statSync(join(templatesSourceDir, file)).isFile()
+          (file) =>
+            file.endsWith(".md") &&
+            statSync(join(templatesSourceDir, file)).isFile()
         );
 
         for (const file of templateFiles) {
           const sourcePath = join(templatesSourceDir, file);
           const targetPath = join(templatesTargetDir, file);
           const exists = existsSync(targetPath);
-          
+
           const sddFile: SddFile = {
             name: `templates/${basename(file, ".md")}`,
             sourcePath,
             targetPath,
             exists,
           };
-          
+
           allFiles.push(sddFile);
           if (exists) {
             conflictingFiles.push(sddFile);
+          } else {
+            newFiles.push(sddFile);
           }
         }
       }
@@ -110,7 +124,8 @@ const InstallSddApp: React.FC = () => {
 
       setFiles(allFiles);
       setExistingFiles(conflictingFiles);
-      
+      setNewFiles(newFiles);
+
       if (conflictingFiles.length > 0) {
         setSelectedIndex(1);
         setMode("checking");
@@ -204,14 +219,28 @@ const InstallSddApp: React.FC = () => {
         return (
           <Box flexDirection="column">
             <Text bold color="yellow">
-              ⚠️  Existing Files Detected
+              ⚠️ Existing Files Detected
             </Text>
             <Text> </Text>
-            <Text>The following files already exist and will be overwritten:</Text>
+            <Text>
+              The following files already exist and will be overwritten:
+            </Text>
             <Text> </Text>
             {existingFiles.map((file) => (
               <Text key={file.name} color="red">
-                • {file.name}
+                🗞️ {file.name}
+              </Text>
+            ))}
+            {newFiles.length > 0 && (
+              <>
+                <Text> </Text>
+                <Text>The following new files will be created:</Text>
+                <Text> </Text>
+              </>
+            )}
+            {newFiles.map((file) => (
+              <Text key={file.name} color="green">
+                🗞️ {file.name}
               </Text>
             ))}
             <Text> </Text>
@@ -278,9 +307,7 @@ const InstallSddApp: React.FC = () => {
               ✅ SDD files installed successfully!
             </Text>
             <Text> </Text>
-            <Text color="gray">
-              Commands installed to: ~/.claude/commands/
-            </Text>
+            <Text color="gray">Commands installed to: ~/.claude/commands/</Text>
             <Text color="gray">
               Templates installed to: ~/.claude/templates/
             </Text>

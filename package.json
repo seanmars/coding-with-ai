@@ -1,6 +1,6 @@
 {
 	"name": "coding-with-ai",
-	"version": "1.0.0",
+	"version": "1.0.86",
 	"main": "dist/statusline.js",
 	"type": "module",
 	"scripts": {

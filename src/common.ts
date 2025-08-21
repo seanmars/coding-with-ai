@@ -50,7 +50,10 @@ export async function loadStatuslineConfig(configPath: string): Promise<Statusli
       { type: 'output-tokens', color: '#50E3C2' },
       { type: 'cached-tokens', color: '#BD10E0' },
       { type: 'context-length', color: '#B8E986' },
-      { type: 'version', color: '#FFFFFF' }
+      { type: 'version', color: '#FFFFFF' },
+      { type: 'cost', color: '#F8E71C' },
+      { type: 'duration', color: '#4A90E2' },
+      { type: 'output-style', color: '#7ED321' }
     ]
   };
 
@@ -243,6 +246,35 @@ export const renderStatusline = async (data: RenderData): Promise<string> => {
         case 'context-length':
           {
             const text = `Ctx: ${normalizedNumber(data.tokenMetrics.contextLength || 0)}`;
+            const coloredText = colorText(text, eleClr);
+            statusline.push(coloredText);
+          }
+          break;
+
+        case 'duration':
+          {
+            const text = `⌛ ${data.duration || 0}`;
+            const coloredText = colorText(text, eleClr);
+            statusline.push(coloredText);
+          }
+          break;
+
+        case 'cost':
+          {
+            let text = '';
+            if ((data.cost ?? 0) == 0) {
+              text = `💵 0`;
+            } else {
+              text = `💵 ${data.cost?.toPrecision(6)}`;
+            }
+            const coloredText = colorText(text, eleClr);
+            statusline.push(coloredText);
+          }
+          break;
+
+        case 'output-style':
+          {
+            const text = `📜 ${data.output_style || 0}`;
             const coloredText = colorText(text, eleClr);
             statusline.push(coloredText);
           }

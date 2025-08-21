@@ -7,7 +7,7 @@
 ## 專案結構
 
 ```text
-F:\workspace\dev\coding-with-ai\
+coding-with-ai/
 ├── src\                          # 原始碼目錄
 │   ├── statusline.ts            # 主要進入點
 │   ├── common.ts                # 核心功能模組
@@ -16,12 +16,28 @@ F:\workspace\dev\coding-with-ai\
 │       ├── installStatuslineCommand.tsx
 │       ├── setupStatuslineCommand.tsx
 │       ├── installAgentsCommand.tsx
-│       └── installCommandsCommand.tsx
+│       ├── cloneAgentsCommand.tsx
+│       ├── installCommandsCommand.tsx
+│       ├── listCcCommandsCommand.tsx
+│       └── installSddCommand.tsx
 ├── dist\                        # 建置輸出目錄
 ├── claude\                      # Claude 相關資源
 │   ├── agents\                  # Claude 代理配置
-│   └── commands\                # Claude 指令配置
-├── res\                         # 資源檔案
+│   │   ├── code-reviewer.md
+│   │   └── dotnet-system-architect.md
+│   ├── commands\                # Claude 指令配置
+│   │   ├── architecture-graph.md
+│   │   ├── codebase-overview.md
+│   │   ├── commit-message.md
+│   │   └── document-writer-zhtw.md
+│   ├── hooks\                   # Claude hooks
+│   │   ├── hooks.json
+│   │   ├── os-notify\
+│   │   └── sound-notify\
+│   ├── spec-driven-development\ # 規格驅動開發工作流程
+│   │   ├── commands\
+│   │   └── templates\
+│   └── CLAUDE-TEMPLATE.md       # Claude 模板文件
 ├── package.json                 # 專案配置
 ├── vite.config.ts              # 建置配置
 ├── tsconfig.json               # TypeScript 配置
@@ -94,9 +110,12 @@ F:\workspace\dev\coding-with-ai\
 **安裝指令**
 
 - `installStatuslineCommand.tsx` - 狀態列安裝程式
-- `installAgentsCommand.tsx` - 代理安裝程式
-- `installCommandsCommand.tsx` - 指令安裝程式
 - `setupStatuslineCommand.tsx` - 狀態列設定程式
+- `installAgentsCommand.tsx` - 代理安裝程式
+- `cloneAgentsCommand.tsx` - 代理複製程式
+- `installCommandsCommand.tsx` - 指令安裝程式
+- `listCcCommandsCommand.tsx` - 列出 Claude Code 指令程式
+- `installSddCommand.tsx` - 規格驅動開發工作流程安裝程式
 
 ### 狀態列元素
 
@@ -150,10 +169,13 @@ F:\workspace\dev\coding-with-ai\
 ## 開發指令
 
 - `pnpm build` - 使用 Vite 建置專案
+- `pnpm list` - 列出 Claude Code 指令
 - `pnpm cc:statusline:install` - 安裝狀態列
 - `pnpm cc:statusline:setup` - 設定狀態列
 - `pnpm cc:agents:install` - 安裝代理
+- `pnpm cc:agents:clone` - 複製代理
 - `pnpm cc:commands:install` - 安裝指令
+- `pnpm cc:sdd:install` - 安裝規格驅動開發工作流程
 
 ## 設定系統
 
@@ -161,6 +183,7 @@ F:\workspace\dev\coding-with-ai\
 - **Claude Code 目錄**：`~/.claude/`
 - **設定檔案**：支援 JSON 格式的自訂設定
 - **代理與指令**：可安裝至 Claude Code 官方目錄
+- **規格驅動開發**：支援完整的 SDD 工作流程，包括需求分析、設計規格和任務分解
 
 ## 授權與作者
 
@@ -168,4 +191,4 @@ F:\workspace\dev\coding-with-ai\
 - **作者**：Sean Mars
 - **版本**：1.0.0
 
-這個專案展示了現代 TypeScript 開發的最佳實務，包括模組化架構、型別安全、跨平台相容性，以及與外部工具（Git、Claude Code）的無縫整合。透過使用 React + Ink 框架，提供了優雅的 CLI 使用者體驗。
+這個專案展示了現代 TypeScript 開發的最佳實務，包括模組化架構、型別安全、跨平台相容性，以及與外部工具（Git、Claude Code）的無縫整合。透過使用 React + Ink 框架，提供了優雅的 CLI 使用者體驗。專案還整合了完整的規格驅動開發工作流程，以及 Claude Code 代理和 hooks 系統，提供豐富的開發工具和自動化功能。

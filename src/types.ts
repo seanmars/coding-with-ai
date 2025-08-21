@@ -1,4 +1,6 @@
+// https://docs.anthropic.com/en/docs/claude-code/statusline#json-input-structure
 export interface ClaudeCodeStatus {
+  hook_event_name: string;
   session_id: string;
   transcript_path: string;
   cwd: string;
@@ -9,6 +11,17 @@ export interface ClaudeCodeStatus {
   workspace: {
     current_dir: string;
     project_dir: string;
+  };
+  version: string;
+  output_style: {
+    name: string;
+  };
+  cost: {
+    total_cost_usd: number;
+    total_duration_ms: number;
+    total_api_duration_ms: number;
+    total_lines_added: number;
+    total_lines_removed: number;
   };
 }
 
@@ -46,6 +59,9 @@ export interface RenderData {
   tokenMetrics: TokenMetrics;
   gitBranch: string;
   version?: string;
+  duration?: string;
+  cost?: number;
+  output_style?: string;
 }
 
 export interface StatusElementData {
@@ -67,5 +83,8 @@ export type ClaudeCodeStatuslineElementType =
   'input-tokens' |
   'output-tokens' |
   'cached-tokens' |
-  'context-length'
+  'context-length' |
+  'duration' |
+  'cost' |
+  'output-style'
   ;

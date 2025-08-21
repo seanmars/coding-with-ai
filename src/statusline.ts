@@ -26,6 +26,13 @@ async function waitingStdin(): Promise<string> {
   }
 }
 
+const msToMmSs = (ms: number): string => {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
 const main = async (): Promise<void> => {
   const { userStatuslineConfigPath } = getConstAppValues();
 
@@ -40,9 +47,13 @@ const main = async (): Promise<void> => {
     try {
 
       const data: ClaudeCodeStatus = JSON.parse(input) as ClaudeCodeStatus;
-      const gitBranch = await getGitBranch() ?? '';
-      const claudeVersion = await getClaudeVersion() ?? '';
+      const claudeVersion = data.version;
       const path = data.transcript_path;
+      const cost = Math.fround(data.cost.total_cost_usd);
+      const duration = msToMmSs(data.cost.total_duration_ms);
+      const output_style = data.output_style.name;
+
+      const gitBranch = await getGitBranch() ?? '';
       const metrics = await getTokenMetrics(path);
       const config = await loadStatuslineConfig(userStatuslineConfigPath);
 
@@ -56,7 +67,10 @@ const main = async (): Promise<void> => {
         modelName: data.model.display_name,
         tokenMetrics: metrics,
         gitBranch: gitBranch,
-        version: claudeVersion
+        version: claudeVersion,
+        cost: cost,
+        duration: duration,
+        output_style: output_style
       });
 
       console.log(statusline);

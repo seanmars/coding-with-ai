@@ -42,6 +42,10 @@ const DefaultColors: ColorInfo[] = [
   { name: "magenta", hex: "#c737c7" },
   { name: "cyan", hex: "#1ac7c7" },
   { name: "white", hex: "#ffffff" },
+  { name: "black", hex: "#000000" },
+  { name: "gray", hex: "#808080" },
+  { name: "light gray", hex: "#d3d3d3" },
+  { name: "dark gray", hex: "#404040" },
 ];
 
 const ElementTypeOptions: ItemOption[] = [
@@ -55,6 +59,9 @@ const ElementTypeOptions: ItemOption[] = [
   { label: "Output Tokens", value: "output-tokens" },
   { label: "Cached Tokens", value: "cached-tokens" },
   { label: "Context Length", value: "context-length" },
+  { label: "Cost", value: "cost" },
+  { label: "Duration", value: "duration" },
+  { label: "Output Style", value: "output-style" }
 ];
 
 const SetupApp: React.FC = () => {

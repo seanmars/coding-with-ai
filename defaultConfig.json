@@ -39,6 +39,18 @@
     {
       "type": "version",
       "color": "#FFFFFF"
+    },
+    {
+      "type": "cost",
+      "color": "#F8E71C"
+    },
+    {
+      "type": "duration",
+      "color": "#4A90E2"
+    },
+    {
+      "type": "output_style",
+      "color": "#7ED321"
     }
   ]
 }

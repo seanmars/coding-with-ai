@@ -253,7 +253,7 @@ export const renderStatusline = async (data: RenderData): Promise<string> => {
 
         case 'duration':
           {
-            const text = `⌛ ${data.duration || 0}`;
+            const text = `⌛${data.duration || 0}`;
             const coloredText = colorText(text, eleClr);
             statusline.push(coloredText);
           }

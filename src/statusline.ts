@@ -26,11 +26,17 @@ async function waitingStdin(): Promise<string> {
   }
 }
 
-const msToMmSs = (ms: number): string => {
+const msToTimeStr = (ms: number): string => {
   const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  if(hours > 0) {
+    return `${hours.toString()}h${minutes.toString()}m`;
+  }
+
+  return `${minutes.toString()}m${seconds.toString()}s`;
 };
 
 const main = async (): Promise<void> => {
@@ -50,7 +56,7 @@ const main = async (): Promise<void> => {
       const claudeVersion = data.version;
       const path = data.transcript_path;
       const cost = Math.fround(data.cost.total_cost_usd);
-      const duration = msToMmSs(data.cost.total_duration_ms);
+      const duration = msToTimeStr(data.cost.total_duration_ms);
       const output_style = data.output_style.name;
 
       const gitBranch = await getGitBranch() ?? '';

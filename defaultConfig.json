@@ -1,0 +1,56 @@
+{
+  "elements": [
+    {
+      "type": "time",
+      "color": "#F8E71C"
+    },
+    {
+      "type": "cwd",
+      "color": "#4A90E2"
+    },
+    {
+      "type": "model",
+      "color": "#7ED321"
+    },
+    {
+      "type": "git-branch",
+      "color": "#F5A623"
+    },
+    {
+      "type": "total-tokens",
+      "color": "#D0021B"
+    },
+    {
+      "type": "input-tokens",
+      "color": "#9013FE"
+    },
+    {
+      "type": "output-tokens",
+      "color": "#50E3C2"
+    },
+    {
+      "type": "cached-tokens",
+      "color": "#BD10E0"
+    },
+    {
+      "type": "context-length",
+      "color": "#B8E986"
+    },
+    {
+      "type": "version",
+      "color": "#FFFFFF"
+    },
+    {
+      "type": "cost",
+      "color": "#F8E71C"
+    },
+    {
+      "type": "duration",
+      "color": "#4A90E2"
+    },
+    {
+      "type": "output_style",
+      "color": "#7ED321"
+    }
+  ]
+}
